@@ -8,7 +8,7 @@
 
 <body>
         <h3>Stock</h3>
-        <table cellpadding="5" cellspacing="5">
+        <table cellspacing="5">
 
                 <th>ID</th>
                 <th>Product</th>
