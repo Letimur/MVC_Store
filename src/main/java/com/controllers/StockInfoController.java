@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.dao.StockInfoDao;
+import com.model.Items;
 import com.model.StockInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,15 @@ public class StockInfoController {
     @Autowired
     private StockInfoDao stockInfoDao;
 
+
+
     @RequestMapping(value = "/")
+    public ModelAndView home(ModelAndView stockInfoModel){
+        stockInfoModel.setViewName("home");
+        return stockInfoModel;
+    }
+
+    @RequestMapping(value = "/stock")
     public ModelAndView getStockInfo(ModelAndView stockInfoModel){
         List<StockInfo> stockInfo = stockInfoDao.getStockInfo();
         stockInfoModel.addObject("stockInfo", stockInfo);
@@ -26,7 +35,15 @@ public class StockInfoController {
         return stockInfoModel;
     }
 
-    @RequestMapping(value = "/add/stock", method = RequestMethod.GET)
+    @RequestMapping(value = "/details")
+    public ModelAndView getItemsInfo(ModelAndView stockInfoModel){
+        List<Items> items = stockInfoDao.getItems();
+        stockInfoModel.addObject("items", items);
+        stockInfoModel.setViewName("items-info");
+        return stockInfoModel;
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addStockInfo(ModelAndView stockInfoModel){
         StockInfo stockInfo = new StockInfo();
         stockInfoModel.addObject("productInfo", stockInfo);
@@ -34,19 +51,26 @@ public class StockInfoController {
         return stockInfoModel;
     }
 
-    @RequestMapping(value = "/add/saveProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/saveProduct", method = RequestMethod.POST)
     public ModelAndView saveProduct(@ModelAttribute StockInfo stockInfo) {
         stockInfoDao.SaveOrUpdateStockInfo(stockInfo);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/stock");
     }
 
-    /*@@RequestMapping(value = "/add/editProduct", method = RequestMethod.GET)
-    public ModelAndView editContact(HttpServletRequest request) {
+    @RequestMapping(value = "/editProduct", method = RequestMethod.GET)
+    public ModelAndView editProduct(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
-        StockInfo stockInfo = stockInfoDao.getStockInfo();
-        ModelAndView model = new ModelAndView("ContactForm");
-        model.addObject("contact", contact);
+        StockInfo stockInfo = stockInfoDao.get(id);
+        ModelAndView model = new ModelAndView("add-stock-info");
+        model.addObject("productInfo", stockInfo);
 
         return model;
-    }*/
+    }
+
+    @RequestMapping(value = "/deleteProduct", method = RequestMethod.GET)
+    public ModelAndView deleteProduct(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        stockInfoDao.delete(id);
+        return new ModelAndView("redirect:/stock");
+    }
 }

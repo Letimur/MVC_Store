@@ -20,6 +20,7 @@ public class C3pODataSource {
 //            new Exception().printStackTrace();
             cpds.setUser("user");
             cpds.setPassword("password");
+
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }

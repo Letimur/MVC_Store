@@ -1,9 +1,21 @@
 package com.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "ITEM_TYPES")
 public class StockInfo {
+    @Id
+    @GeneratedValue
     private int id;
+
+    @Column(name = "PRODUCT")
     private String product;
+
+    @Column(name = "PRICE")
     private int price;
+
+    @Column(name = "QUANTITY")
     private int quantity;
 
     public StockInfo(){

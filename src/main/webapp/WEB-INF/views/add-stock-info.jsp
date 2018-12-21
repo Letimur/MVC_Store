@@ -6,25 +6,25 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>New/Edit Contact</title>
+    <title>Добавить/изменить продукт</title>
 </head>
 <body>
 <div align="center">
-    <h1>New/Edit Product</h1>
+    <h1>Добавление/изменение продукта</h1>
     <%--@elvariable id="productInfo" type="com.controllers"--%>
     <form:form action="saveProduct" method="post" modelAttribute="productInfo">
         <table>
             <form:hidden path="id"/>
             <tr>
-                <td>Product:</td>
+                <td>Продукт:</td>
                 <td><form:input path="product" /></td>
             </tr>
             <tr>
-                <td>Price:</td>
+                <td>Цена:</td>
                 <td><form:input path="price" /></td>
             </tr>
             <tr>
-                <td>Quantity:</td>
+                <td>Кол-во:</td>
                 <td><form:input path="quantity" /></td>
             </tr>
                 <td colspan="2" align="center"><input type="submit" value="Save"></td>
